@@ -1,6 +1,5 @@
 package com.example.andrew.deathwatch20;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -46,11 +45,12 @@ public class NavDrawer extends AppCompatActivity
             Intent intent = new Intent(NavDrawer.this, BasicSkillsActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_armor) {
+        } /*else if (id == R.id.nav_armor) {
+
 
         } else if (id == R.id.nav_weapons) {
 
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
