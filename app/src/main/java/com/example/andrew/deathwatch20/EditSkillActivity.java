@@ -12,6 +12,7 @@ import android.widget.TextView;
  */
 public class EditSkillActivity extends NavDrawer {
 
+    TextView textTitle;
     TextView textNum;
     private int num;
     int position;
@@ -22,14 +23,14 @@ public class EditSkillActivity extends NavDrawer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_view);
 
-        createActivityView();
+        //createActivityView();
 
         Bundle extras = getIntent().getExtras();
         position = Integer.valueOf(extras.getString("p"));
         Log.i("EditActivity:", "Position: " + position);
 
 
-        TextView textTitle = (TextView) findViewById(R.id.titleView);
+        textTitle = (TextView) findViewById(R.id.titleView);
         textNum = (TextView) findViewById(R.id.numView);
         Button bAdd = (Button) findViewById(R.id.bPlus);
         Button bSubtract = (Button) findViewById(R.id.bSubtract);

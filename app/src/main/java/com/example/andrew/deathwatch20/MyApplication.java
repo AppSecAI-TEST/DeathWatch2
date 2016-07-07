@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 /**
- * I have no idea what this does. Makes the application context static?
+ * Provides the application context
  * Created by Andrew on 6/10/2016.
  */
 public class MyApplication extends Application {

@@ -18,7 +18,7 @@ public class SkillAdapter extends BaseAdapter {
 
     private Activity mContext;
     Skills skills = Skills.getInstance();
-    // references skills
+
     private String[] mSkillIds = {
             "WS", "BS","S", "T", "A", "I", "P", "WP", "F"
     };
@@ -56,7 +56,7 @@ public class SkillAdapter extends BaseAdapter {
 
             block.setMinimumHeight(BasicSkillsActivity.height/3);
             block.setOrientation(LinearLayout.VERTICAL);
-            block.setBackgroundColor(Color.rgb(224,224,224));
+            block.setBackgroundColor(Color.rgb(54,54,54));
 
         } else {
             Log.i("Position (ELSE): ", Integer.toString(position) + " " + mSkillIds[position]);
@@ -69,7 +69,7 @@ public class SkillAdapter extends BaseAdapter {
                 new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT, 30f);
         tParams.gravity = Gravity.CENTER_HORIZONTAL;
-        title.setTextColor(Color.BLACK);
+        title.setTextColor(Color.WHITE);
         title.setTextSize(40);
         title.setLayoutParams(tParams);
 
@@ -78,7 +78,7 @@ public class SkillAdapter extends BaseAdapter {
                 new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT, 70f);
         nParams.gravity = Gravity.CENTER_HORIZONTAL;
-        number.setTextColor(Color.BLACK);
+        number.setTextColor(Color.WHITE);
         number.setTextSize(70);
         number.setLayoutParams(nParams);
 

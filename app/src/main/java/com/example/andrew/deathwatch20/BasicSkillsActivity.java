@@ -1,8 +1,8 @@
 package com.example.andrew.deathwatch20;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,25 +14,20 @@ import android.widget.GridView;
  */
 public class BasicSkillsActivity extends NavDrawer {
 
-    public static int width;
-    public static int height;
+    private GridView gridview;
+    public static int height;   // gives height to SkillAdapter views
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.skill_view);
 
-        createActivityView();
+        //createActivityView() This is from the NavDrawer
 
-        GridView gridview = (GridView) findViewById(R.id.skillGrid);
+        gridview = (GridView) findViewById(R.id.skillGrid);
         gridview.setAdapter(new SkillAdapter(this));
 
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
-        width = metrics.widthPixels;
-        //the subtraction avoids overlap with toolbar
-        height = metrics.heightPixels - 170;
+        height = Resources.getSystem().getDisplayMetrics().heightPixels - 56;
 
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -51,7 +46,7 @@ public class BasicSkillsActivity extends NavDrawer {
     @Override
     public void onResume(){
         super.onResume();
-        GridView gridview = (GridView) findViewById(R.id.skillGrid);
+        gridview = (GridView) findViewById(R.id.skillGrid);
         gridview.setAdapter(new SkillAdapter(this));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,4 +63,12 @@ public class BasicSkillsActivity extends NavDrawer {
 
     }
 
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
 }

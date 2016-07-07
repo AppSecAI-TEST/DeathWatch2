@@ -3,9 +3,12 @@ package com.example.andrew.deathwatch20;
 import android.content.Context;
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * Holds the user's skills
@@ -18,8 +21,7 @@ public class Skills {
             {"Weapon Skill", "Ballistic Skill", "Strength", "Toughness", "Agility",
                     "Intelligence", "Perception", "Will Power", "Fellowship" } ;
     private static Skills instance = null;
-    private String fileName = "dwSL";
-    private FileOutputStream outputStream;
+    private String FILE_NAME = "DWS";
 
     /**
      * SKILLS CONSTRUCTOR
@@ -27,8 +29,8 @@ public class Skills {
      */
     private Skills() {
         // create new file or get exsiting file from storage
-        if (fileExists(fileName)) {
-                //open and read into skillList
+        if (fileExists(FILE_NAME)) {
+            readFile();
         } else {
             createNewFile();
         }
@@ -51,27 +53,22 @@ public class Skills {
      * @return boolean
      */
     public boolean fileExists(String fname){
-        //File file = MyApplication.getAppContext().getFileStreamPath(fname);
-        return false;//file.exists();
-    }
-
-    private void createNewFile(){
-        skillList = new Integer[]{31, 31, 31, 31, 31, 31, 31, 31, 31};
-        //File file = new File(MyApplication.getAppContext().getFilesDir(), fileName);
-
-//        try {
-//            outputStream = openFileOutput(fileName, MyApplication.getAppContext().MODE_PRIVATE);
-//            for(int value : skillList){
-//                outputStream.write(value.getBytes());
-//            }
-//
-//            outputStream.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        File file = MyApplication.getAppContext().getFileStreamPath(fname);
+        Log.i("File Path: ", file.toString());
+        return file.exists();
     }
 
     /**
+     * Creates a new file if there isn't one
+     */
+    private void createNewFile(){
+        skillList = new Integer[]{31, 31, 31, 31, 31, 31, 31, 31, 31};
+        File file = new File(MyApplication.getAppContext().getFilesDir(), FILE_NAME);
+        saveSkillSet();
+    }
+
+    /**
+     * Saves the individual skill then calls saveSkillSet()
      *
      * @param position in the array
      * @param value the new value to be inserted into the position of the array
@@ -79,18 +76,45 @@ public class Skills {
     public void saveSkill(int position, int value){
         Log.i("Skills: ", "New Value: " + Integer.toString(value));
         this.skillList[position] = value;
-        //saveSkillSet();
+        saveSkillSet();
 
     }
 
     /**
-     *
+     * This saves the skillList to internal storage file
      */
-//    private void saveSkillSet(){
-//        // save new array to locale storage
-//        FileOutputStream fos = openFileOutput(fileName, Context.MODE_PRIVATE);
-//        fos.write(skillList.);
-//        fos.close();
-//    }
+    private void saveSkillSet() {
+        // save new array to locale storage
+        try {
+            FileOutputStream fos =
+                    MyApplication.getAppContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
 
+            for (Integer value : skillList) {
+                String line = value + "\n";
+                fos.write(line.getBytes());
+            }
+
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void readFile(){
+        skillList = new Integer[9];
+        try {
+            FileInputStream fis = MyApplication.getAppContext().openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader bufferedReader = new BufferedReader(isr);
+            String line;
+            int i = 0;
+            while ((line = bufferedReader.readLine()) != null){
+                Log.i("Reading: ", line);
+                skillList[i] = Integer.valueOf(line);
+                i++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

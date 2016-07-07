@@ -57,7 +57,7 @@ public class NavDrawer extends AppCompatActivity
         return true;
     }
 
-    public void createActivityView(){
+    /*public void createActivityView(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -69,5 +69,5 @@ public class NavDrawer extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
+    }*/
 }

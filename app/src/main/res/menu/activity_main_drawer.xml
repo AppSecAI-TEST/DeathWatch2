@@ -6,14 +6,14 @@
             android:id="@+id/nav_skills"
             android:icon="@drawable/black_helment"
             android:title="Basic Skills" />
-        <!--<item-->
-            <!--android:id="@+id/nav_armor"-->
-            <!--android:icon="@drawable/black_armor"-->
-            <!--android:title="Armour" />-->
-        <!--<item-->
-            <!--android:id="@+id/nav_weapons"-->
-            <!--android:icon="@drawable/black_weapon"-->
-            <!--android:title="Weapons" />-->
+        <!--<item
+            android:id="@+id/nav_armor"
+            android:icon="@drawable/black_armor"
+            android:title="Armour" />
+        <item
+            android:id="@+id/nav_weapons"
+            android:icon="@drawable/black_weapon"
+            android:title="Weapons" />-->
         <!--<item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
