@@ -13,7 +13,7 @@
         <item
             android:id="@+id/nav_weapons"
             android:icon="@drawable/black_weapon"
-            android:title="Weapons" />-->
+            android:title="Weapon" />-->
         <!--<item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"

@@ -52,9 +52,12 @@ public class MainActivity extends NavDrawer {
 
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(getApplicationContext(),
+                Log.i("Menu Item Pressed:", "Weapon Activity Opening");
+                Intent intent = new Intent(MainActivity.this, WeaponActivity.class);
+                startActivity(intent);
+                /*Toast toast = Toast.makeText(getApplicationContext(),
                         "Not Available", Toast.LENGTH_SHORT);
-                toast.show();
+                toast.show();*/
 
             }
         });

@@ -28,6 +28,9 @@
             android:screenOrientation="portrait"
             android:label="Edit"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".WeaponActivity"
+            android:screenOrientation="portrait"
+            android:label="Weapons"/>
     </application>
 
 </manifest>

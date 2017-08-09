@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 /**
- *
+ * Displays the character's stats
  * Created by Andrew on 6/5/2016.
  */
 public class BasicSkillsActivity extends NavDrawer {
@@ -23,7 +23,7 @@ public class BasicSkillsActivity extends NavDrawer {
         setContentView(R.layout.skill_view);
 
         //createActivityView() This is from the NavDrawer
-
+        //TODO: MAYBE CHANGE THIS TO A TABLE LAYOUT
         gridview = (GridView) findViewById(R.id.skillGrid);
         gridview.setAdapter(new SkillAdapter(this));
 
