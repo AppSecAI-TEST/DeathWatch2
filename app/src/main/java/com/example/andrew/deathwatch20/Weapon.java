@@ -9,24 +9,24 @@ public class Weapon {
 
     private String name;
     private String damage;
-    private int ammo;
-    private int pen;
-    private String effect;
+    private String ammo;
+    private String pen;
+    private String special;
 
     Weapon() {
         name = "Astrates Heavy Bolter";
         damage = "2d10+14";
-        ammo = 60;
-        pen = 5;
-        effect = "Tearing";
+        ammo = "60";
+        pen = "5";
+        special = "Tearing";
     }
     // Todo: able to create grenades, melee, and bolters weapons
-    Weapon(String name, String damage, int ammo, int pen, String effect){
+    Weapon(String name, String damage, String ammo, String pen, String effect){
         setName(name);
         setDamage(damage);
         setAmmo(ammo);
         setPen(pen);
-        setEffect(effect);
+        setSpecial(effect);
     }
 
     public String getName() {
@@ -46,37 +46,37 @@ public class Weapon {
     }
 
     public String getAmmo() {
-        if(ammo != 0)
-            return "Ammo: " + Integer.toString(ammo);
+        if(Integer.parseInt(ammo) != 0)
+            return "Ammo: " + ammo;
         else
             return "Ammo: N/A";
     }
 
-    public void setAmmo(int ammo) {
+    public void setAmmo(String ammo) {
         this.ammo = ammo;
     }
 
     public String getPen() {
-        return "Pen: " + Integer.toString(pen);
+        return "Pen: " + pen;
     }
 
-    public void setPen(int pen) {
+    public void setPen(String pen) {
         this.pen = pen;
     }
 
-    public String getEffect() {
-        return "Effect: " + effect;
+    public String getSpecial() {
+        return "Effect: " + special;
     }
 
-    public void setEffect(String effect) {
-        this.effect = effect;
+    public void setSpecial(String special) {
+        this.special = special;
     }
 
     // private String FILE_NAME = "DWW";
 
     public String toString() {
         return name + "\nDamage: " + damage + "\nPen: " + pen + "   Ammo: "
-                + ammo + "\nEffect: " + effect;
+                + ammo + "\nEffect: " + special;
     }
 
 }

@@ -1,15 +1,16 @@
 package com.example.andrew.deathwatch20;
 
-import android.graphics.Color;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 
 /**
  * This is where the user can see the a list of weapons
@@ -18,45 +19,90 @@ import java.util.ArrayList;
 
 public class WeaponActivity extends NavDrawer {
 
-    //private Weapon weapon = new Weapon();
+    private WeaponList weapons;
     private static WeaponAdapter adapter;
+    private TextView noWeapon;
+    EditText nameInput;
+    EditText damageInput;
+    EditText penInput;
+    EditText ammoInput;
+    EditText specialInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // cancelling out side touch on dialog
+        // https://stackoverflow.com/questions/4650246/how-to-cancel-an-dialog-themed-like-activity-when-touched-outside-the-window/5831214#5831214
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weapon_view);
-
-        final ArrayList<Weapon> weaponList = new ArrayList<Weapon>();
-        weaponList.add(new Weapon("Astrates Heavy Bolter", "2d10+14", 60, 5, "Tearing"));
-        weaponList.add(new Weapon("Ceremonial Sword", "1d10+13", 0, 2, "Rending"));
-
+        noWeapon = (TextView) findViewById(R.id.noWeapon);
         ListView listView = (ListView) findViewById(R.id.weaponList);
+        weapons = new WeaponList();
 
-        //custom adapter http://www.journaldev.com/10416/android-listview-with-custom-adapter-example-tutorial
-        adapter = new WeaponAdapter(weaponList, getApplicationContext());
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Weapon weapon =  weaponList.get(position);
+        if(weapons.getWeaponArrayList().size() == 0) {
+            noWeapon.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.GONE);
+        }
+        else {
+            noWeapon.setVisibility(View.GONE);
+            listView.setVisibility(View.VISIBLE);
+            //custom adapter http://www.journaldev.com/10416/android-listview-with-custom-adapter-example-tutorial
+            adapter = new WeaponAdapter(weapons.getWeaponArrayList(), getApplicationContext());
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Weapon weapon =  weapons.getWeaponArrayList().get(position);
+                }
+            });
+        }
+    }
+
+    public void onAddWeapon(View v) {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View layout = inflater.inflate(R.layout.weapon_create, null);
+        dialog.setTitle("Add Weapon");
+        dialog.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                nameInput = (EditText)layout.findViewById(R.id.name);
+                damageInput = (EditText)layout.findViewById(R.id.damage);
+                penInput = (EditText)layout.findViewById(R.id.pen);
+                ammoInput = (EditText)layout.findViewById(R.id.ammo);
+                specialInput = (EditText)layout.findViewById(R.id.special);
+
+                if(nameInput.getText().length() != 0 && damageInput.getText().length() != 0 &&
+                    penInput.getText().length() != 0 && ammoInput.getText().length() != 0 &&
+                        specialInput.getText().length() != 0)
+                    weapons.saveWeapon(nameInput.getText().toString(),
+                            damageInput.getText().toString(), penInput.getText().toString(),
+                            ammoInput.getText().toString(), specialInput.getText().toString());
+                else{
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Not Saved, All fields must be filled", Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
         });
+        dialog.setNegativeButton("Cancel", null);
+        dialog.setView(layout);
+        dialog.create();
+        dialog.show();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.weapon_menu, menu);
-        return true;
-    }
+    public void onDeleteFile(View v) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Delete Weapons");
+        dialog.setMessage("You are about to Delete ALL of your weapons. Are you sure?");
+        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                weapons.deleteFile();
+            }
+        });
+        dialog.setNegativeButton("Cancel", null);
+        dialog.create();
+        dialog.show();
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // create a new weapon
-        Toast toast = Toast.makeText(getApplicationContext(),
-                "Not Available", Toast.LENGTH_SHORT);
-        toast.show();
-        return true;
     }
-
 
 }

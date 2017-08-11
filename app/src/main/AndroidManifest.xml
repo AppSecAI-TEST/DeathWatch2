@@ -30,7 +30,8 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".WeaponActivity"
             android:screenOrientation="portrait"
-            android:label="Weapons"/>
+            android:label="Weapons"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

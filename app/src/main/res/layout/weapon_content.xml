@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,17 +8,70 @@
     android:background="#363636">
 
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/weaponList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:orientation="horizontal"
+            android:layout_weight=".9">
+
+            <Button
+                android:id="@+id/add_weapon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:background="#3d3d3d"
+                android:onClick="onAddWeapon"
+                android:text="+"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="40sp" />
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:background="#3d3d3d"
+                android:onClick="onDeleteFile"
+                android:text="Delete"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight=".1">
+
+            <TextView
+                android:id="@+id/noWeapon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="78dp"
+                android:text="No Weapons"
+                android:textAlignment="center"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="30sp"
+                android:visibility="visible" />
+
+            <ListView
+                android:id="@+id/weaponList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

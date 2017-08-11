@@ -9,7 +9,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/** Custom ArrayAdapter in order to display the Weapon list correctly
+/**
+ * Custom ArrayAdapter in order to display the Weapon list correctly
  *
  * Created by Andrew on 8/7/2017.
  */
@@ -27,7 +28,6 @@ public class WeaponAdapter extends ArrayAdapter<Weapon> implements View.OnClickL
         TextView txtAmmo;
         TextView txtPen;
         TextView txtEffect;
-
     }
 
     public WeaponAdapter(ArrayList<Weapon> data, Context context) {
@@ -62,7 +62,7 @@ public class WeaponAdapter extends ArrayAdapter<Weapon> implements View.OnClickL
             viewHolder.txtDamage =  (TextView) convertView.findViewById(R.id.damage);
             viewHolder.txtAmmo =    (TextView) convertView.findViewById(R.id.ammo);
             viewHolder.txtPen =     (TextView) convertView.findViewById(R.id.pen);
-            viewHolder.txtEffect =  (TextView) convertView.findViewById(R.id.effect);
+            viewHolder.txtEffect =  (TextView) convertView.findViewById(R.id.special);
 
             result = convertView;
 
@@ -72,17 +72,16 @@ public class WeaponAdapter extends ArrayAdapter<Weapon> implements View.OnClickL
             result = convertView;
         }
 
-//        Animation animation = AnimationUtils.loadAnimation(mContext, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
-//        result.startAnimation(animation);
-
         lastPosition = position;
 
         viewHolder.txtName.setText(weapon.getName());
         viewHolder.txtDamage.setText(weapon.getDamage());
         viewHolder.txtAmmo.setText(weapon.getAmmo());
         viewHolder.txtPen.setText(weapon.getPen());
-        viewHolder.txtEffect.setText(weapon.getEffect());
+        viewHolder.txtEffect.setText(weapon.getSpecial());
 
         return convertView;
     }
+
+
 }
